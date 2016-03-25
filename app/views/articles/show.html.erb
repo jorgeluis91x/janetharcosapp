@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Reference:</strong>
+  <%= @article.reference %>
+</p>
+
+<p>
+  <strong>Product category:</strong>
+  <%= @article.product_category %>
+</p>
+
+<p>
+  <strong>Detail:</strong>
+  <%= @article.detail %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @article.quantity %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @article.size %>
+</p>
+
+<p>
+  <strong>Provider:</strong>
+  <%= @article.provider %>
+</p>
+
+<p>
+  <strong>Purchase value:</strong>
+  <%= @article.purchase_value %>
+</p>
+
+<p>
+  <strong>Sales value:</strong>
+  <%= @article.sales_value %>
+</p>
+
+<p>
+  <strong>Rental value:</strong>
+  <%= @article.rental_value %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @article.status %>
+</p>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>

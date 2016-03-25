@@ -4,6 +4,10 @@
   <strong>Nombre:</strong>
   <%= @product_category.name %>
 </p>
+<p>
+  <strong>Sigla:</strong>
+  <%= @product_category.initial %>
+</p>
 
 <%= link_to 'Editar', edit_product_category_path(@product_category) %> |
 <%= link_to 'Volver', product_categories_path %>

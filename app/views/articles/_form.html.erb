@@ -1,0 +1,58 @@
+<%= form_for(@article) do |f| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Referencia" %><br>
+    <%= f.text_field :reference %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Categoria" %><br>
+    <%= f.collection_select :product_category_id, ProductCategory.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Detalle" %><br>
+    <%= f.text_field :detail %>
+  </div>
+  <div class="field">
+    <%= f.label "Cantidad" %><br>
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label "Talla"%><br>
+    <%= f.text_field :size %>
+  </div>
+  <div class="field">
+    <%= f.label :provider_id %><br>
+    <%= f.collection_select :provider_id, Provider.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Valor de Compra" %><br>
+    <%= f.number_field :purchase_value %>
+  </div>
+  <div class="field">
+    <%= f.label "Valor de Venta" %><br>
+    <%= f.number_field :sales_value %>
+  </div>
+  <div class="field">
+    <%= f.label "Valor de Alquiler" %><br>
+    <%= f.number_field :rental_value %>
+  </div>
+  <div class="field">
+    <%= f.label "Estado"%><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Guardar"%>
+  </div>
+<% end %>
