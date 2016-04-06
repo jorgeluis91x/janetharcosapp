@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rentals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Invoice detail</th>
+      <th>Start date</th>
+      <th>Final date</th>
+      <th>Deposit</th>
+      <th>State</th>
+      <th>Observation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rentals.each do |rental| %>
+      <tr>
+        <td><%= rental.invoice_detail %></td>
+        <td><%= rental.start_date %></td>
+        <td><%= rental.final_date %></td>
+        <td><%= rental.deposit %></td>
+        <td><%= rental.state %></td>
+        <td><%= rental.observation %></td>
+        <td><%= link_to 'Show', rental %></td>
+        <td><%= link_to 'Edit', edit_rental_path(rental) %></td>
+        <td><%= link_to 'Destroy', rental, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rental', new_rental_path %>

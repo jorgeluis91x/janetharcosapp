@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Clientes</h1>
+<div class = "table-responsive">
 
-<table>
+<table class="table table-striped" id='clients_table'>
   <thead>
     <tr>
       <th>Identificacion</th>
@@ -17,21 +18,36 @@
 
   <tbody>
     <% @clients.each do |client| %>
-      <tr>
-        <td><%= client.identification %></td>
-        <td><%= client.name %></td>
-        <td><%= client.direction %></td>
-        <td><%= client.phone %></td>
-        <td><%= client.email %></td>
-        <td><%= client.birthdate %></td>
-        <td><%= link_to 'Ver', client %></td>
-        <td><%= link_to 'Editar', edit_client_path(client) %></td>
-        <td><%= link_to 'Eliminar', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <%# Render table row partial for each person object %>
+      <%= render partial: 'table_row', locals: {client: client} %>
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
-<%= link_to 'Nuevo Cliente', new_client_path %>
+<%#link_to 'Nuevo Cliente', new_client_path %>
+
+<%=link_to 'Nuevo Cliente', '#new_client_modal', 'data-toggle' => 'modal' %>
+
+<%# Bootstrap modal markup. @see: http://getbootstrap.com/javascript/#modals %>
+<div class="modal fade" id="new_client_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Crear Nuevo Cliente</h4>
+      </div>
+      <div class="modal-body">
+        <%# Render the new client form (passing modal => true to enable remote => true) %>
+        <%= render 'form', modal: true %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

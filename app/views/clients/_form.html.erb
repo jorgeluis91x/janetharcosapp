@@ -1,4 +1,7 @@
-<%= form_for(@client) do |f| %>
+<%# Conditionally set remote: true. Also, passing model name as data attribute %>
+<% modal ||= false %>
+<% remote = modal ? true : false %>
+<%= form_for(@client, remote: remote, html: {role: :form, 'data-model' => 'client'}) do |f| %>
   <% if @client.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
@@ -11,17 +14,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label "Identificacion" %><br>
-    <%= f.text_field :identification %>
+  <div class="field form-group">
+    <%= f.label "Identificacion", class: 'control-label'%><br>
+    <%= f.text_field :identification,class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label "Nombre" %><br>
-    <%= f.text_field :name %>
+  <div class="field form-group">
+    <%= f.label "Nombre", class: 'control-label' %><br>
+    <%= f.text_field :name,class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label "Direccion"%><br>
-    <%= f.text_field :direction %>
+  <div class="field form-group">
+    <%= f.label "Direccion", class: 'control-label'%><br>
+    <%= f.text_field :direction,class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label "Telefono" %><br>
@@ -33,9 +36,9 @@
   </div>
   <div class="field">
     <%= f.label "Fecha Cumpleaños"%><br>
-    <%= f.date_select :birthdate %>
+    <%= f.date_select :birthdate  %>
   </div>
   <div class="actions">
-    <%= f.submit "Guardar" %>
+    <%= f.submit "Guardar", {:class=>"btn btn-default"} %>
   </div>
 <% end %>

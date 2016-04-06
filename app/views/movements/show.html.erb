@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Invoice:</strong>
+  <%= @movement.invoice %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @movement.date %>
+</p>
+
+<p>
+  <strong>Sum:</strong>
+  <%= @movement.sum %>
+</p>
+
+<p>
+  <strong>Movement type:</strong>
+  <%= @movement.movement_type %>
+</p>
+
+<p>
+  <strong>Observation:</strong>
+  <%= @movement.observation %>
+</p>
+
+<%= link_to 'Edit', edit_movement_path(@movement) %> |
+<%= link_to 'Back', movements_path %>

@@ -5,7 +5,15 @@ class ClientsController < ApplicationController
   # GET /clients.json
   def index
     @clients = Client.all
+
+    @client = Client.new
   end
+
+  #defino el metodo de seleccion
+  def select
+    @clients = Client.all
+  end
+
 
   # GET /clients/1
   # GET /clients/1.json
@@ -30,9 +38,13 @@ class ClientsController < ApplicationController
       if @client.save
         format.html { redirect_to @client, notice: 'Client was successfully created.' }
         format.json { render :show, status: :created, location: @client }
+        # added:
+        format.js   { render action: 'show', status: :created, location: @client }
       else
         format.html { render :new }
         format.json { render json: @client.errors, status: :unprocessable_entity }
+         # added:
+        format.js   { render json: @client.errors, status: :unprocessable_entity }
       end
     end
   end

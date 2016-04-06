@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324184605) do
+ActiveRecord::Schema.define(version: 20160401152814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,53 @@ ActiveRecord::Schema.define(version: 20160324184605) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "invoice_details", force: :cascade do |t|
+    t.integer  "invoice_id"
+    t.integer  "article_id"
+    t.integer  "quantity"
+    t.integer  "unit_value"
+    t.integer  "state_product_id"
+    t.string   "observation"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "invoice_details", ["article_id"], name: "index_invoice_details_on_article_id", using: :btree
+  add_index "invoice_details", ["invoice_id"], name: "index_invoice_details_on_invoice_id", using: :btree
+  add_index "invoice_details", ["state_product_id"], name: "index_invoice_details_on_state_product_id", using: :btree
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "number"
+    t.date     "date"
+    t.integer  "client_id"
+    t.string   "observation"
+    t.integer  "total"
+    t.boolean  "null"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
+
+  create_table "movement_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movements", force: :cascade do |t|
+    t.integer  "invoice_id"
+    t.date     "date"
+    t.integer  "sum"
+    t.integer  "movement_type_id"
+    t.string   "observation"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "movements", ["invoice_id"], name: "index_movements_on_invoice_id", using: :btree
+  add_index "movements", ["movement_type_id"], name: "index_movements_on_movement_type_id", using: :btree
+
   create_table "product_categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -61,6 +108,32 @@ ActiveRecord::Schema.define(version: 20160324184605) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rentals", force: :cascade do |t|
+    t.integer  "invoice_detail_id"
+    t.date     "start_date"
+    t.date     "final_date"
+    t.integer  "deposit"
+    t.integer  "state"
+    t.string   "observation"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "rentals", ["invoice_detail_id"], name: "index_rentals_on_invoice_detail_id", using: :btree
+
+  create_table "state_products", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "articles", "product_categories"
   add_foreign_key "articles", "providers"
+  add_foreign_key "invoice_details", "articles"
+  add_foreign_key "invoice_details", "invoices"
+  add_foreign_key "invoice_details", "state_products"
+  add_foreign_key "invoices", "clients"
+  add_foreign_key "movements", "invoices"
+  add_foreign_key "movements", "movement_types"
+  add_foreign_key "rentals", "invoice_details"
 end

@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
+  #devise_for :admin_users, ActiveAdmin::Devise.config
+  #ActiveAdmin.routes(self)
+  resources :movements
+  resources :rentals
+  resources :invoice_details
+  resources :movement_types
+  resources :invoices
+  resources :state_products
+  resources :state_moneys
   resources :articles
   resources :providers
   resources :product_categories
   resources :clients
+
+  root to: 'articles#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

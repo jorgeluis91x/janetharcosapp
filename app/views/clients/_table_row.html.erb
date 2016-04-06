@@ -1,0 +1,11 @@
+<tr>
+	<td><%= client.identification %></td>
+    <td><%= client.name %></td>
+    <td><%= client.direction %></td>
+    <td><%= client.phone %></td>
+    <td><%= client.email %></td>
+    <td><%= client.birthdate %></td>
+    <td><%= link_to 'Ver', client %></td>
+    <td><%= link_to 'Editar', edit_client_path(client) %></td>
+	<td><%= link_to 'Eliminar', client, method: :delete, data: { confirm: 'Estas Seguro?' } %></td>
+</tr>

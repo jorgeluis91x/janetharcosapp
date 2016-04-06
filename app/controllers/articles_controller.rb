@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
+    
   end
 
   # GET /articles/1
@@ -71,4 +72,6 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:reference, :product_category_id, :detail, :quantity, :size, :provider_id, :purchase_value, :sales_value, :rental_value, :status)
     end
+
+    
 end

@@ -1,19 +1,28 @@
+<%def conPuntos(numero)
+      str = numero.to_s.reverse
+      str.gsub!(/([0-9]{3})/,"\\1.")
+      str.gsub(/,$/,"").reverse
+    end
+    %>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Articles</h1>
+<h1>Articulos</h1>
+<div class = "table-responsive">
 
-<table>
+<table class="table table-striped">
+
   <thead>
     <tr>
-      <th>Reference</th>
-      <th>Product category</th>
-      <th>Detail</th>
-      <th>Quantity</th>
-      <th>Size</th>
-      <th>Provider</th>
-      <th>Purchase value</th>
-      <th>Sales value</th>
-      <th>Rental value</th>
+      <th>Referencia</th>
+      <th>Categoria</th>
+      <th>Detalle</th>
+      <th>Cant</th>
+      <th>Talla</th>
+      <th>Provedor</th>
+      <th>Vlr. Compra</th>
+      <th>Vlr. Venta</th>
+      <th>Vlr Alquiler</th>
       <th>Status</th>
       <th colspan="3"></th>
     </tr>
@@ -23,12 +32,12 @@
     <% @articles.each do |article| %>
       <tr>
         <td><%= article.reference %></td>
-        <td><%= article.product_category %></td>
+        <td><%= article.product_category.name %></td>
         <td><%= article.detail %></td>
         <td><%= article.quantity %></td>
         <td><%= article.size %></td>
-        <td><%= article.provider %></td>
-        <td><%= article.purchase_value %></td>
+        <td><%= article.provider.name %></td>
+        <td><%= conPuntos(article.purchase_value) %></td>
         <td><%= article.sales_value %></td>
         <td><%= article.rental_value %></td>
         <td><%= article.status %></td>
@@ -39,6 +48,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 

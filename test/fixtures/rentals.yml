@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invoice_detail_id: 
+  start_date: 2016-04-01
+  final_date: 2016-04-01
+  deposit: 1
+  state: 1
+  observation: MyString
+
+two:
+  invoice_detail_id: 
+  start_date: 2016-04-01
+  final_date: 2016-04-01
+  deposit: 1
+  state: 1
+  observation: MyString

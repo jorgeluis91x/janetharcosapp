@@ -1,0 +1,41 @@
+<%= form_for(@invoice_detail) do |f| %>
+  <% if @invoice_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invoice_detail.errors.count, "error") %> prohibited this invoice_detail from being saved:</h2>
+
+      <ul>
+      <% @invoice_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :invoice_id %><br>
+    <%= f.text_field :invoice_id %>
+  </div>
+  <div class="field">
+    <%= f.label :article_id %><br>
+    <%= f.text_field :article_id %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_value %><br>
+    <%= f.number_field :unit_value %>
+  </div>
+  <div class="field">
+    <%= f.label :state_product_id %><br>
+    <%= f.text_field :state_product_id %>
+  </div>
+  <div class="field">
+    <%= f.label :observation %><br>
+    <%= f.text_field :observation %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
