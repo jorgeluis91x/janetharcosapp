@@ -52,7 +52,18 @@ $(document).ready(function(){
                 url: '/entries/total_invoices/'+number+'',
                 //contentType: "application/json; charset=utf-8",
                 success: function(data) {
-                        $("#entry_total_invoice_id").val(data.id);
+                  if(data == null){
+                    alert("No tienes Facturas con este Numero")
+                 
+                  }else{
+                    
+                    $("#entry_total_invoice_id").val(data.id);
+
+
+                      
+
+                  }
+                        
                        // $("#entry_deposit").val(data.total_value);
                         
                 }});
@@ -137,7 +148,7 @@ $(document).ready(function(){
                 success: function(data) {
                         $("#number").val(data.number);
                         $("#entry_total_invoice_id").val(data.id);
-                        $
+                        
                        // $("#entry_deposit").val(data.total_value);
                         
                 }});

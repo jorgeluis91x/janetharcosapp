@@ -1,13 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Total Invoices</h1>
+<h1>Facturas</h1>
 
+<div class = "table-responsive">
 
-<table>
+<table class="table table-striped">
+
   <thead>
     <tr>
-      <th>Number</th>
-      <th>Total value</th>
+      <th>Numero</th>
+      <th>Valor Total</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,15 +19,16 @@
       <tr>
         <td><%= total_invoice.number %></td>
         <td><%= total_invoice.total_value %></td>
-        <td><%= link_to 'Show', total_invoice %></td>
-        <td><%= link_to 'Edit', edit_total_invoice_path(total_invoice) %></td>
-        <td><%= link_to 'Destroy', total_invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', total_invoice %></td>
+        <td><%= link_to 'Editar', edit_total_invoice_path(total_invoice) %></td>
+        <td><%= link_to 'Eliminar', total_invoice, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
 
 <br>
 
-<%= link_to 'New Total invoice', new_total_invoice_path %>
+<%= link_to 'Nueva Factura', new_total_invoice_path %>
