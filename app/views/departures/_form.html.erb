@@ -1,0 +1,33 @@
+<%= form_for(@departure) do |f| %>
+  <% if @departure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@departure.errors.count, "error") %> prohibited this departure from being saved:</h2>
+
+      <ul>
+      <% @departure.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Fecha" %><br>
+    <%= f.date_select :entry_date %>
+  </div>
+  <div class="field">
+    <%= f.label "Tipo" %><br>
+    <%= f.collection_select :departure_type_id, DepartureType.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Detalle" %><br>
+    <%= f.text_field :detail %>
+  </div>
+  <div class="field">
+    <%= f.label "Valor Total" %><br>
+    <%= f.number_field :total_value %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Guardar", class: 'btn btn-default' %>
+  </div>
+<% end %>

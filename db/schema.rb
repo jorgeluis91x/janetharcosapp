@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401152814) do
+ActiveRecord::Schema.define(version: 20160417160647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,43 @@ ActiveRecord::Schema.define(version: 20160401152814) do
     t.date     "birthdate"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "departure_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "departures", force: :cascade do |t|
+    t.date     "entry_date"
+    t.integer  "departure_type_id"
+    t.string   "detail"
+    t.integer  "total_value"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "departures", ["departure_type_id"], name: "index_departures_on_departure_type_id", using: :btree
+
+  create_table "entries", force: :cascade do |t|
+    t.integer  "total_invoice_id"
+    t.date     "entry_date"
+    t.integer  "entry_type_id"
+    t.string   "observation"
+    t.integer  "payment_type"
+    t.integer  "deposit"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "entries", ["entry_type_id"], name: "index_entries_on_entry_type_id", using: :btree
+  add_index "entries", ["total_invoice_id"], name: "index_entries_on_total_invoice_id", using: :btree
+
+  create_table "entry_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "invoice_details", force: :cascade do |t|
@@ -127,8 +164,18 @@ ActiveRecord::Schema.define(version: 20160401152814) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "total_invoices", force: :cascade do |t|
+    t.integer  "number"
+    t.integer  "total_value"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   add_foreign_key "articles", "product_categories"
   add_foreign_key "articles", "providers"
+  add_foreign_key "departures", "departure_types"
+  add_foreign_key "entries", "entry_types"
+  add_foreign_key "entries", "total_invoices"
   add_foreign_key "invoice_details", "articles"
   add_foreign_key "invoice_details", "invoices"
   add_foreign_key "invoice_details", "state_products"

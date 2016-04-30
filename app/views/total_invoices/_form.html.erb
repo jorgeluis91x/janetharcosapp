@@ -1,0 +1,25 @@
+<%= form_for(total_invoice) do |f| %>
+  <% if total_invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(total_invoice.errors.count, "error") %> prohibited this total_invoice from being saved:</h2>
+
+      <ul>
+      <% total_invoice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :number %><br>
+    <%= f.number_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :total_value %><br>
+    <%= f.number_field :total_value %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Guardar', class: 'btn btn-default total_invoices_save'%>
+  </div>
+<% end %>

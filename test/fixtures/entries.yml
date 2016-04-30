@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_invoice_id: 
+  entry_date: 2016-04-17
+  entry_type_id: 
+  observation: MyString
+  payment_type: 1
+  deposit: 1
+
+two:
+  total_invoice_id: 
+  entry_date: 2016-04-17
+  entry_type_id: 
+  observation: MyString
+  payment_type: 1
+  deposit: 1

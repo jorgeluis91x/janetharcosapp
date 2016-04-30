@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :departures
+  resources :entries
+  resources :total_invoices
+  resources :departure_types
+  resources :entry_types
   #devise_for :admin_users, ActiveAdmin::Devise.config
   #ActiveAdmin.routes(self)
   resources :movements
@@ -13,7 +18,15 @@ Rails.application.routes.draw do
   resources :product_categories
   resources :clients
 
-  root to: 'articles#index'
+  resources :total_invoices do
+    resources :entries
+  end
+  get 'entries/total_invoices/:number', to:  'entries#getTotalInvoice', as: 'total_invoice_select'
+
+  root to: 'entries#index'
+
+#ruta para obtener un cliente al seleccionar
+   get '/clients/select/:id', to: 'clientes#seleccionar', as: 'clients_select'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

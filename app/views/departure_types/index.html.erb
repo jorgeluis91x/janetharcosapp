@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Departure Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @departure_types.each do |departure_type| %>
+      <tr>
+        <td><%= departure_type.name %></td>
+        <td><%= link_to 'Show', departure_type %></td>
+        <td><%= link_to 'Edit', edit_departure_type_path(departure_type) %></td>
+        <td><%= link_to 'Destroy', departure_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Departure type', new_departure_type_path %>

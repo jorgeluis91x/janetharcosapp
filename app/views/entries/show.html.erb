@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Factura:</strong>
+  <%= @entry.total_invoice.number %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @entry.entry_date %>
+</p>
+
+<p>
+  <strong>Tipo de Ingreso:</strong>
+  <%= @entry.entry_type.name %>
+</p>
+
+<p>
+  <strong>Observacion:</strong>
+  <%= @entry.observation %>
+</p>
+
+<p>
+  <strong>Tipo de pago:</strong>
+  <% if @entry.payment_type == 1%>
+          Efectivo
+        <%else%>
+          Tarjeta
+        <%end%>
+  
+</p>
+
+<p>
+  <strong>Deposito:</strong>
+  <%= @entry.deposit %>
+</p>
+
+<%= link_to 'Editar', edit_entry_path(@entry) %> |
+<%= link_to 'Atras', entries_path %>

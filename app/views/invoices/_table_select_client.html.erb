@@ -1,3 +1,4 @@
+
 <table class="table table-striped" id='clients_table'>
   <thead>
     <tr>
@@ -10,12 +11,26 @@
 
 
   <tbody>
+    <%@clients = Client.all%>
     <% @clients.each do |client| %>
-    <tr>
+
+   
+    <tr data-id= <%= client.id%>>
+      <%id_cliente = client.identification%>
       <td><%= client.identification %></td>
       <td><%= client.name %></td>
       <td><%= client.direction %></td>
-      <td><%= link_to 'ver', client %></td>
+      
+      <td>
+         
+      <button data-id= <%= client.id%> type="button" class="btn btn-default select" aria-label="Left Align">
+        <span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span></button>
+
+         </td>
+
+      
+
+     
     </tr>
     <% end %>
   </tbody>

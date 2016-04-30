@@ -1,0 +1,158 @@
+<%# Conditionally set remote: true. Also, passing model name as data attribute %>
+<% modal ||= false %>
+<% remote = modal ? true : false %>
+<%= form_for(@entry, remote: remote, html: {role: :form, 'data-model' => 'entry'}) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div id="facura">
+<%= f.hidden_field :total_invoice_id %>
+
+<div class="field">
+   <%= f.label "Numero Factura" %><br>
+
+
+ 
+    <input type="text" id="number" value="<%= @total_invoice.number %>">  
+
+  
+
+      <button type="button" class="btn btn-default get-number" aria-label="Left Align">
+        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></button>
+
+
+    <a data-toggle="modal" href="#add_total_invoice">
+      <button type="button" class="btn btn-default " aria-label="Left Align">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+
+    </a>
+  </div>
+</div>
+
+  <script>
+//agrego este javascript para traer el id de 
+
+$(document).ready(function(){
+
+  $(".get-number").click(function(){
+
+      var number = document.getElementById('number').value 
+      //var number = $();
+      $.ajax({
+
+                url: '/entries/total_invoices/'+number+'',
+                //contentType: "application/json; charset=utf-8",
+                success: function(data) {
+                        $("#entry_total_invoice_id").val(data.id);
+                       // $("#entry_deposit").val(data.total_value);
+                        
+                }});
+
+ 
+      
+  })
+})
+
+
+          
+      
+</script>
+  <div class="field">
+    <%= f.label "Fecha Ingreso" %><br>
+    <%= f.date_select :entry_date %>
+  </div>
+  <div class="field">
+    <%= f.label "Tipo de Ingreso" %><br>
+    <%= f.collection_select(:entry_type_id, EntryType.all, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label "Observacion" %><br>
+    <%= f.text_field :observation %>
+  </div>
+  <div class="field">
+    <%= f.label "Tipo de Pago" %><br>
+    <%= f.select (:payment_type) do %>
+    <% [['Efectivo', 1], ['Tarjeta', 2]].each do |c| -%>
+    <%= content_tag(:option, c.first, value: c.last) %>
+  <% end %>
+<% end %>
+  </div>
+  <div class="field">
+    <%= f.label "Deposito"%><br>
+    <%= f.number_field :deposit %>
+  </div>
+  <div class="actions">
+    <%= f.submit  "Guardar" , class: 'btn btn-default'%>
+  </div>
+<% end %>
+
+<div class="modal fade" id="add_total_invoice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Agregar Factura</h4>
+      </div>
+      <div class="modal-body">
+                <%= render :partial => 'total_invoices/form', modal: true, :locals => {:total_invoice =>@total_invoice}%>
+        <%# Render the new person form (passing modal => true to enable remote => true) %>
+        <%# render 'form', modal: true %>
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+//agrego este javascript para traer el id de 
+
+$(document).ready(function(){
+  $("#new_total_invoice").on("submit",function(event){
+    event.preventDefault();
+
+    console.log(event)
+     var number = document.getElementById('total_invoice_number').value 
+      var total_value = document.getElementById('total_invoice_total_value').value 
+      
+      //var number = $();
+      $.ajax({
+
+                url: '/total_invoices.json',
+                type: "POST",
+                contentType: "application/json",
+                data: '{"total_invoice":{"number":'+number+',"total_value":'+total_value+'}}',
+                success: function(data) {
+                        $("#number").val(data.number);
+                        $("#entry_total_invoice_id").val(data.id);
+                        $
+                       // $("#entry_deposit").val(data.total_value);
+                        
+                }});
+
+      $('#add_total_invoice').modal('hide');
+
+
+  })
+
+
+})
+
+
+          
+      
+</script>
+
+

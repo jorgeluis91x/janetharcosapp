@@ -1,3 +1,4 @@
+
 <%# Conditionally set remote: true. Also, passing model name as data attribute %>
 <% modal ||= false %>
 <% remote = modal ? true : false %>
@@ -22,14 +23,50 @@
     <%= f.label :date %><br>
     <%= f.date_select :date %>
   </div>
+  <% if defined? @invoice.client.identification %>
+  
+
   <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.text_field :client_id %>
+    <%= f.label "Identificacion" %><br>
+    <input type="text" id="identification" value="<%=@invoice.client.identification%>">
     <a data-toggle="modal" href="#select_client_modal">
       <button type="button" class="btn btn-default" aria-label="Left Align">
         <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></button>
 
     </a>
+    </div>
+
+     <div class="field">
+    <%= f.label "Nombre" %><br>
+    <input type="text" id="name" value="<%=@invoice.client.name%>" readonly="true">
+    </div>
+    <%else%>
+
+
+  <div class="field">
+    <%= f.label "Identificacion" %><br>
+    <input type="text" id="identification">
+    <a data-toggle="modal" href="#select_client_modal">
+      <button type="button" class="btn btn-default" aria-label="Left Align">
+        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></button>
+
+    </a>
+    </div>
+
+     <div class="field">
+    <%= f.label "Nombre" %><br>
+    <input type="text" id="name"  readonly="true">
+    </div>
+    <%end%>
+
+
+
+     <%= f.hidden_field :client_id %>
+
+
+ 
+
+    
     
 
   </div>
@@ -49,12 +86,38 @@
     <%= f.submit %>
   </div>
 
-  <%= render 'table_select_client'%>
+  
 <% end %>
 
 
 <%# Bootstrap modal markup. @see: http://getbootstrap.com/javascript/#modals %>
+  <script>
+//agrego este javascript para traer el id de 
+
+$(document).ready(function(){
+
+  $(".select").click(function(){
+      var id = $(this).attr("data-id");
+      $.ajax({
+                url: '/clients/'+id+'.json',
+                //contentType: "application/json; charset=utf-8",
+                success: function(data) {
+                        $("#invoice_client_id").val(data.id);
+                        $("#identification").val(data.identification);
+                        $("#name").val(data.name);
+                }});
+
+    $('#select_client_modal').modal('hide');
+      
+  })
+})
+
+
+          
+      
+</script>
 <div class="modal fade" id="select_client_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -62,6 +125,7 @@
         <h4 class="modal-title" id="myModalLabel">Seleccionar Cliente</h4>
       </div>
       <div class="modal-body">
+        <%= render 'table_select_client', modal: true%>
         <%# Render the new person form (passing modal => true to enable remote => true) %>
         <%# render 'form', modal: true %>
       </div>
@@ -71,3 +135,4 @@
     </div>
   </div>
 </div>
+
