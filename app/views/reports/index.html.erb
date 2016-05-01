@@ -1,0 +1,75 @@
+  <div class="col-sm-9 col-md-10 main">
+
+    <h1 class="page-header"> Caja</h1>
+    <div class="row placeholders">
+      <p></p>
+      <div class="panels">
+        <div class="panel-entries">
+          <h2>Entradas</h2>
+          <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Factura</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% total_entries = 0 %>
+          <% @entries.each do |entry| %>
+          <tr>
+            <td><%= entry.total_invoice.number %></td>
+              <td class ="valores-dinero">$ <%= entry.deposit %></td>
+          </tr>
+          <% total_entries = total_entries + entry.deposit %>
+          <% end %>
+
+          <tr>
+            <td>Total</td>
+            <td class ="valores-dinero">$ <%= total_entries%></td>
+          </tr>
+          
+
+        </tbody>
+
+      </table>
+
+      </div>
+      <div class ="panel-departures">
+        <h2>Salidas</h2>
+        <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Detalle</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% total_departures = 0 %>
+        <% @departures.each do |departure| %>
+          <tr>
+            <td><%= departure.detail %></td>
+              <td class ="valores-dinero">$ <%= departure.total_value %></td>
+          </tr>
+          <% total_departures = total_departures + departure.total_value %>
+          <% end %>
+
+          <tr>
+            <td>Total</td>
+            <td class ="valores-dinero">$ <%= total_departures%></td>
+          </tr>
+        </tbody>
+          
+
+      </table>
+      </div>
+      </div>
+      <div class="caja">
+        <h1>Total: $ <%= total_entries- total_departures%></h1>
+
+      </div>
+
+    
+
+
+    </div>
+  </div>

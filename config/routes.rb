@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :entries
   end
   get 'entries/total_invoices/:number', to:  'entries#getTotalInvoice', as: 'total_invoice_select'
+  get 'reports', to:  'reports#index', as: 'reports'
 
   root to: 'entries#index'
 

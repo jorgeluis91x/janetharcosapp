@@ -4,7 +4,7 @@ class DeparturesController < ApplicationController
   # GET /departures
   # GET /departures.json
   def index
-    @departures = Departure.all
+    @departures = Departure.order(entry_date: :desc)
   end
 
   # GET /departures/1
