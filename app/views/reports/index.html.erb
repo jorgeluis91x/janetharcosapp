@@ -18,14 +18,14 @@
           <% @entries.each do |entry| %>
           <tr>
             <td><%= entry.total_invoice.number %></td>
-              <td class ="valores-dinero">$ <%= entry.deposit %></td>
+              <td class ="valores-dinero"> <%= number_to_currency(entry.deposit , precision: 0)%></td>
           </tr>
           <% total_entries = total_entries + entry.deposit %>
           <% end %>
 
           <tr>
             <td>Total</td>
-            <td class ="valores-dinero">$ <%= total_entries%></td>
+            <td class ="valores-dinero"><%=number_to_currency(  total_entries, precision: 0)%></td>
           </tr>
           
 
@@ -48,14 +48,14 @@
         <% @departures.each do |departure| %>
           <tr>
             <td><%= departure.detail %></td>
-              <td class ="valores-dinero">$ <%= departure.total_value %></td>
+              <td class ="valores-dinero"><%=number_to_currency(  departure.total_value, precision: 0) %></td>
           </tr>
           <% total_departures = total_departures + departure.total_value %>
           <% end %>
 
           <tr>
             <td>Total</td>
-            <td class ="valores-dinero">$ <%= total_departures%></td>
+            <td class ="valores-dinero"><%= number_to_currency( total_departures, precision: 0)%></td>
           </tr>
         </tbody>
           
@@ -64,7 +64,7 @@
       </div>
       </div>
       <div class="caja">
-        <h1>Total: $ <%= total_entries- total_departures%></h1>
+        <h1>Total: <%=  number_to_currency(total_entries- total_departures, precision: 0)%></h1>
 
       </div>
 

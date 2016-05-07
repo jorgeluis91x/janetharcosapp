@@ -22,7 +22,7 @@
   <tbody>
     <% @entries.each do |entry| %>
       <tr>
-        <td><%= entry.total_invoice.number %></td>
+        <td class ="valores-dinero"><%= entry.total_invoice.number %></td>
         <td><%= entry.entry_date %></td>
         <td><%= entry.entry_type.name %></td>
         <td><%= entry.observation %></td>
@@ -34,7 +34,7 @@
 
           
       
-        <td><%= entry.deposit %></td>
+        <td class ="valores-dinero"><%= number_to_currency(entry.deposit, precision: 0) %></td>
         <td><%= link_to 'Ver', entry %></td>
         <td><%= link_to 'Editar', edit_entry_path(entry) %></td>
         <td><%= link_to 'Eliminar', entry, method: :delete, data: { confirm: 'Estas Seguro?' } %></td>
@@ -42,6 +42,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 

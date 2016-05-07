@@ -1,14 +1,64 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Numero:</strong>
+<h3>
+  <strong>Factura:</strong>
   <%= @total_invoice.number %>
-</p>
+</h3>
 
-<p>
-  <strong>Valor Total:</strong>
-  <%= @total_invoice.total_value %>
-</p>
+
+
+<h4 align="center">Ingresos</h4>
+
+<div class = "table-responsive">
+
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+     
+      <th>Fecha</th>
+      <th>Tipo Ingreso</th>
+      <th>Observacion</th>
+      <th>Tipo de Pago</th>
+      <th>Abono</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  	<% @entries = Entry.joins(:total_invoice).where("number = #{@total_invoice.number}") %>
+  	<% sumadeposito = Entry.joins(:total_invoice).where("number = #{@total_invoice.number}").sum(:deposit) %>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= entry.entry_date %></td>
+        <td><%= entry.entry_type.name %></td>
+        <td><%= entry.observation %></td>
+        <% if entry.payment_type == 1%>
+          <td>Efectivo</td>
+        <%else%>
+          <td>Tarjeta</td>
+        <%end%>
+        <td class ="valores-dinero"><%= number_to_currency(entry.deposit, precision: 0) %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<div align="right">
+	<h3 >
+  		<strong>Total Abonos</strong>
+  		<%= number_to_currency(sumadeposito, precision: 0)%>
+	</h3>
+	<h3 >
+  		<strong>Saldo:</strong>
+  		<%= number_to_currency(@total_invoice.total_value - sumadeposito, precision: 0)%>
+	</h3>
+	<h3>
+  		<strong>Valor Total:</strong>
+  		<%= number_to_currency(@total_invoice.total_value, precision: 0) %>
+	</h3>
+</div>
+
 
 
 <%= link_to 'Editar', edit_total_invoice_path(@total_invoice) %> |
