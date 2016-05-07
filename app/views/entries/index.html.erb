@@ -23,7 +23,7 @@
     <% @entries.each do |entry| %>
       <tr>
         <td class ="valores-dinero"><%= entry.total_invoice.number %></td>
-        <td><%= entry.entry_date %></td>
+        <td><%= entry.entry_date.to_formatted_s(:long) %></td>
         <td><%= entry.entry_type.name %></td>
         <td><%= entry.observation %></td>
         <% if entry.payment_type == 1%>
@@ -42,6 +42,7 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
 </div>
 
 <br>

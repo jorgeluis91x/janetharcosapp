@@ -18,7 +18,7 @@
   <tbody>
     <% @departures.each do |departure| %>
       <tr>
-        <td><%= departure.entry_date %></td>
+        <td><%= departure.entry_date.to_formatted_s(:long)  %></td>
         <td><%= departure.departure_type.name %></td>
         <td><%= departure.detail %></td>
         <td class ="valores-dinero"><%= number_to_currency(departure.total_value, precision: 0) %></td>
@@ -29,6 +29,7 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
 
 <br>
 

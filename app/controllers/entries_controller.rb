@@ -27,7 +27,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.all.order(entry_date: :desc)
+    @entries = Entry.all.order(entry_date: :desc).paginate(page: params[:page], per_page: 20)
 
   end
 

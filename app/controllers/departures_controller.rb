@@ -4,7 +4,7 @@ class DeparturesController < ApplicationController
   # GET /departures
   # GET /departures.json
   def index
-    @departures = Departure.order(entry_date: :desc)
+    @departures = Departure.order(entry_date: :desc).paginate(page: params[:page], per_page: 20)
   end
 
   # GET /departures/1

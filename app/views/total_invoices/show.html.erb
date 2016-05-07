@@ -29,7 +29,7 @@
   	<% sumadeposito = Entry.joins(:total_invoice).where("number = #{@total_invoice.number}").sum(:deposit) %>
     <% @entries.each do |entry| %>
       <tr>
-        <td><%= entry.entry_date %></td>
+        <td><%= entry.entry_date.to_formatted_s(:long)  %></td>
         <td><%= entry.entry_type.name %></td>
         <td><%= entry.observation %></td>
         <% if entry.payment_type == 1%>
