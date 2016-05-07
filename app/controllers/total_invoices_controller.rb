@@ -6,6 +6,7 @@ class TotalInvoicesController < ApplicationController
   # GET /total_invoices.json
   def index
     @total_invoices = TotalInvoice.all
+    @total_invoices = TotalInvoice.search(params[:number]) if params[:number].present?
   end
 
   # GET /total_invoices/1

@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20160506174348) do
   add_index "departures", ["departure_type_id"], name: "index_departures_on_departure_type_id", using: :btree
 
   create_table "entries", force: :cascade do |t|
-    t.integer  "total_invoice_id"
+    t.integer  "total_invoice_id", null: false
     t.date     "entry_date"
     t.integer  "entry_type_id"
     t.string   "observation"
@@ -171,6 +171,8 @@ ActiveRecord::Schema.define(version: 20160506174348) do
     t.datetime "updated_at",  null: false
     t.boolean  "null"
   end
+
+  add_index "total_invoices", ["number"], name: "unique_number", unique: true, using: :btree
 
   add_foreign_key "articles", "product_categories"
   add_foreign_key "articles", "providers"

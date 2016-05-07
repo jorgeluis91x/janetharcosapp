@@ -2,6 +2,20 @@
 
 <h1>Facturas</h1>
 
+<div class="row">
+  <div class="col-lg-6">
+    <%= form_tag(total_invoices_path, :method => "get", id: "search-form") do %>
+    <div class="input-group">
+      <span class="input-group-btn">
+        <%= submit_tag "Buscar" , class: 'btn btn-default' %>
+      </span>
+      <%= text_field_tag :number, params[:number], placeholder: "Buscar Factura", class: 'form-control' %>
+
+      <% end %>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
 <div class = "table-responsive">
 
 <table class="table table-striped">
@@ -10,6 +24,8 @@
     <tr>
       <th>Numero</th>
       <th>Valor Total</th>
+      <th>Abonos</th>
+      <th>Saldo</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,8 +33,14 @@
   <tbody>
     <% @total_invoices.each do |total_invoice| %>
       <tr>
+        <% sumadeposito = Entry.includes(:total_invoice).where("number = #{total_invoice.number}").sum(:deposit) %>
+       
+    
+   
         <td><%= total_invoice.number %></td>
         <td><%= total_invoice.total_value %></td>
+        <td><%= sumadeposito %></td>
+        <td><%= total_invoice.total_value - sumadeposito %></td>
         <td><%= link_to 'Ver', total_invoice %></td>
         <td><%= link_to 'Editar', edit_total_invoice_path(total_invoice) %></td>
         <td><%= link_to 'Eliminar', total_invoice, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
