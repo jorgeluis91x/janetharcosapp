@@ -5,6 +5,10 @@ class ReportsController < ApplicationController
 		@entries = Entry.where entry_date: Date.today
 		@departures = Departure.where entry_date: Date.today
 
+		@entries = Entry.where entry_date: params[:fecha]  if params[:fecha].present?
+		@departures = Departure.where entry_date: params[:fecha]  if params[:fecha].present?
+
+
 	end
 
 	def debitSearch
