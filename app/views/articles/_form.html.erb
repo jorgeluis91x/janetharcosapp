@@ -10,49 +10,78 @@
       </ul>
     </div>
   <% end %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <%= f.label "Referencia" %><br>
+        <%= f.text_field :reference, class: 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label "Referencia" %><br>
-    <%= f.text_field :reference %>
-  </div>
-  
-  <div class="field">
-    <%= f.label "Categoria" %><br>
-    <%= f.collection_select :product_category_id, ProductCategory.all, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label "Detalle" %><br>
-    <%= f.text_field :detail %>
-  </div>
-  <div class="field">
-    <%= f.label "Cantidad" %><br>
-    <%= f.number_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label "Talla"%><br>
-    <%= f.text_field :size %>
-  </div>
-  <div class="field">
-    <%= f.label :provider_id %><br>
-    <%= f.collection_select :provider_id, Provider.all, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label "Valor de Compra" %><br>
-    <%= f.number_field :purchase_value %>
-  </div>
-  <div class="field">
-    <%= f.label "Valor de Venta" %><br>
-    <%= f.number_field :sales_value %>
-  </div>
-  <div class="field">
-    <%= f.label "Valor de Alquiler" %><br>
-    <%= f.number_field :rental_value %>
-  </div>
-  <div class="field">
-    <%= f.label "Estado"%><br>
-    <%= f.number_field :status %>
+      <div class="field">
+        <%= f.label "Detalle" %><br>
+        <%= f.text_field :detail, class: 'form-control' %>
+      </div>
+
+       <div class="field">
+        <%= f.label "Talla"%><br>
+        <%= f.text_field :size, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Valor de Compra" %><br>
+        <%= f.number_field :purchase_value, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Valor de Alquiler" %><br>
+        <%= f.number_field :rental_value, class: 'form-control' %>
+      </div>
+      
+    </div>
+    <div class="col-md-6">
+      <div class="field">
+        <%= f.label "Categoria" %><br>
+        <%= f.collection_select :product_category_id, ProductCategory.all, :id, :name, {},{:class=> 'form-control'} %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Cantidad" %><br>
+        <%= f.number_field :quantity, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :provider_id %><br>
+        <%= f.collection_select :provider_id, Provider.all, :id, :name, {},{:class=> 'form-control'} %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Valor de Venta" %><br>
+        <%= f.number_field :sales_value, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Estado"%><br>
+        <%= f.number_field :status, class: 'form-control' %>
+      </div>
+      
+    </div>
+
+    
   </div>
   <div class="actions">
-    <%= f.submit "Guardar"%>
+    <%= f.submit "Guardar", {:class=>"btn btn-primary"}%>
   </div>
+
+  
+  
+  
+  
+  
+ 
+  
+  
+  
+  
+  
+  
 <% end %>
